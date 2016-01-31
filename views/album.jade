@@ -1,0 +1,10 @@
+h1 Album
+
+ul
+  each item in items
+    li
+      a(href=item.url)
+       img(src=item.thumbnailUrl)
+
+p
+  = items.length + ' items'

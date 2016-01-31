@@ -1,0 +1,9 @@
+h1 Index
+
+ul
+  each album in albums
+    li
+      a(href=album.url)= album.name
+
+p
+  = albums.length + ' albums'
