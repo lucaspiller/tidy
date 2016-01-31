@@ -1,9 +1,12 @@
-h1 Index
+extends layout.jade
+block content
+  #index.container
+    h1 Index
 
-ul
-  each album in albums
-    li
-      a(href=album.url)= album.name
+    ul.albums
+      each album in albums
+        li
+          a(href=album.url)= album.name
 
-p
-  = albums.length + ' albums'
+    p
+      = albums.length + ' albums'

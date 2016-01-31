@@ -1,0 +1,11 @@
+#index {
+  ul.albums {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      width: 33%;
+    }
+  }
+}

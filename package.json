@@ -9,7 +9,16 @@
   "author": "Luca Spiller",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^1.8.1"
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "imagesloaded": "^4.1.0",
+    "lodash": "^4.1.0",
+    "masonry-layout": "^4.0.0",
+    "node-sass": "^3.4.2",
+    "nodemon": "^1.8.1",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.12"
   },
   "dependencies": {
     "bluebird": "^3.1.1",

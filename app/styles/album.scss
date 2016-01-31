@@ -1,0 +1,31 @@
+#album {
+  .item {
+    width: 19.5%;
+    display: block;
+    padding: 0.3%;
+
+    a {
+      display: block;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      transition: all .5s ease;
+      vertical-align: middle;
+    }
+  }
+
+  .item:hover {
+    img {
+      transform: scale(1.04);
+    }
+  }
+
+  .item-w2 {
+    width: 39%;
+  }
+}

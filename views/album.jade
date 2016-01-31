@@ -1,10 +1,13 @@
-h1 Album
+extends layout.jade
+block content
+  #album.container
+    h1 Album
 
-ul
-  each item in items
-    li
-      a(href=item.url)
-       img(src=item.thumbnailUrl)
+    .items
+      each item in items
+        .item
+          a(href=item.url)
+           img(src=item.thumbnailUrl)
 
-p
-  = items.length + ' items'
+    p
+      = items.length + ' items'
