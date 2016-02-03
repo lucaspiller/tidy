@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     require('./albums/main.js')
   } else if (path.match(/^\/items\/[0-9]+$/i)) {
     // items page
+    require('./items/main.js')
   } else if (path.match(/^\/$/i)) {
     // index page
   }

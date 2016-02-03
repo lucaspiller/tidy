@@ -1,6 +1,5 @@
 extends layout.jade
 block content
-  #item.container
-    h1 Item
-
-    img.item(src=item.fullUrl)
+  #item
+    .image-container
+      img.item(src=item.thumbnailUrl data-full=item.fullUrl)
