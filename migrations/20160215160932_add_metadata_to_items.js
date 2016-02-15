@@ -10,6 +10,8 @@ exports.up = function(knex, Promise) {
       table.integer('width')
       table.integer('height')
       table.integer('timestamp')
+      table.real('latitude')
+      table.real('longitude')
     })
   ])
 }

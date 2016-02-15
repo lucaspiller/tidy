@@ -25,6 +25,7 @@
   "dependencies": {
     "async": "^1.5.2",
     "bluebird": "^3.1.1",
+    "dms2dec": "^1.1.0",
     "exif": "^0.6.0",
     "express": "^4.13.4",
     "glob": "^6.0.4",
