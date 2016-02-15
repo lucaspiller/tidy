@@ -3,6 +3,7 @@
 require('whatwg-fetch')
 const dateFormat = require('dateformat')
 
+const item        = document.querySelector('#item')
 const image       = document.querySelector('#image img')
 const fullSrc     = image.getAttribute('data-full')
 const metadataSrc = image.getAttribute('data-metadata')
@@ -81,9 +82,9 @@ tempImage.src = fullSrc + "?width=" + window.innerWidth + "&height=" + window.in
 
 // events
 image.onclick = function() {
-  metadata.classList.remove('hidden')
+  item.classList.add('metadata')
 }
 
 metadata.onclick = function() {
-  metadata.classList.add('hidden')
+  item.classList.remove('metadata')
 }
