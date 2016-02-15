@@ -1,4 +1,7 @@
+'use strict'
+
 require('whatwg-fetch')
+const dateFormat = require('dateformat')
 
 const image       = document.querySelector('#image img')
 const fullSrc     = image.getAttribute('data-full')
@@ -12,8 +15,15 @@ fetch(metadataSrc)
     return response.json()
   })
   .then(function(metadata) {
+    if (metadata.timestamp) {
+      const date = new Date(metadata.timestamp * 1000)
+      const formatted = dateFormat(date, "mmmm dS yyyy")
+      document.querySelector('#metadata .taken span')
+        .textContent = formatted
+    }
+
     if (metadata.width && metadata.height) {
-      var mp = (metadata.width * metadata.height) / 1000000
+      let mp = (metadata.width * metadata.height) / 1000000
       if (mp >= 2) {
         mp = Math.floor(mp)
       } else {

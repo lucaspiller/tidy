@@ -9,6 +9,7 @@ exports.up = function(knex, Promise) {
       table.integer('focal_length')
       table.integer('width')
       table.integer('height')
+      table.integer('timestamp')
     })
   ])
 }
