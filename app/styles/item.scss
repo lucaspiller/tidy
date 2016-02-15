@@ -63,6 +63,26 @@
       strong, span {
         display: block;
       }
+
+      .map {
+        display: block;
+        margin-top: 70px;
+
+        img {
+          opacity: 0.3;
+          -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+          transition: 0.25s linear opacity, 0.25s linear -webkit-filter, 0.25s linear filter;
+        }
+
+        &:hover {
+          img {
+            opacity: 1;
+            -webkit-filter: grayscale(0%);
+            filter: grayscale(0%);
+          }
+        }
+      }
     }
   }
 }

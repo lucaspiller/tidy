@@ -60,6 +60,16 @@ fetch(metadataSrc)
       document.querySelector('#metadata .iso span')
         .textContent = metadata.iso
     }
+
+    if (metadata.latitude && metadata.longitude) {
+      const coord = metadata.latitude + ',' + metadata.longitude
+      const linkUrl = `https://maps.google.com?q=${coord}`
+      const imgUrl = `//maps.googleapis.com/maps/api/staticmap?size=400x200&zoom=15&maptype=terrain&format=jpg&markers=${coord}`
+      document.querySelector('#metadata .map').href = linkUrl
+      document.querySelector('#metadata .map img').src = imgUrl
+    } else {
+      document.querySelector('#metadata .map').remove()
+    }
   })
 
 // load fullsize image
