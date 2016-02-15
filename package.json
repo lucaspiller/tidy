@@ -18,7 +18,8 @@
     "nodemon": "^1.8.1",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
-    "webpack": "^1.12.12"
+    "webpack": "^1.12.12",
+    "whatwg-fetch": "^0.11.0"
   },
   "dependencies": {
     "async": "^1.5.2",

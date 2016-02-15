@@ -1,5 +1,43 @@
 extends layout.jade
 block content
   #item
-    .image-container
-      img.item(src=item.thumbnailUrl data-full=item.fullUrl)
+    #image
+      img.item(src=item.thumbnailUrl data-full=item.fullUrl data-metadata=item.metadataUrl)
+
+    #metadata.hidden
+      .inner
+        .row
+          .col-md-6.taken
+            strong Taken On
+            span N/A
+
+          .col-md-6.dimensions
+            strong Dimensions
+            span N/A
+
+        .row
+          .col-md-6.make
+            strong Camera make
+            span N/A
+
+          .col-md-6.model
+            strong Camera model
+            span N/A
+
+        .row
+          .col-md-6.aperture
+            strong Aperture
+            span N/A
+
+          .col-md-6.exposure
+            strong Exposure
+            span N/A
+
+        .row
+          .col-md-6.focal-length
+            strong Focal Length
+            span N/A
+
+          .col-md-6.iso
+            strong ISO
+            span N/A

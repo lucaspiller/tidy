@@ -1,16 +1,68 @@
 #item {
-  .image-container {
+  height: 100%;
+  width: 100%;
+
+  #image {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     text-align: center;
+
+    img {
+      margin: 0 auto;
+      min-width: 100%;
+      min-height: 100%;
+    }
   }
 
-  img.item {
-    margin: 0 auto;
-    min-width: 100%;
-    min-height: 100%;
+  #metadata {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    visibility: visible;
+    opacity: 1;
+    transition: 0.25s linear visibility, 0.25s linear opacity;
+
+    &.hidden {
+      display: block !important; // override bootstraps .hidden
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .inner {
+      position: relative;
+      width: 400px;
+      margin: 0 auto;
+      top: 50%;
+      transform: translateY(-50%);
+
+      .row {
+        margin-bottom: 5px;
+      }
+
+      strong {
+        text-transform: uppercase;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 20px;
+      }
+
+      span {
+        font-family: Courier, monospace;
+        font-size: 15px;
+        line-height: 25px;
+      }
+
+      strong, span {
+        display: block;
+      }
+    }
   }
 }
