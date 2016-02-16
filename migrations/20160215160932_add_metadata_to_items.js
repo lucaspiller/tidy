@@ -1,8 +1,8 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.table('items', function(table) {
-      table.string('make')
-      table.string('model')
+      table.text('make')
+      table.text('model')
       table.integer('exposure')
       table.integer('f_number')
       table.integer('iso')
@@ -12,6 +12,8 @@ exports.up = function(knex, Promise) {
       table.integer('timestamp')
       table.real('latitude')
       table.real('longitude')
+      table.integer('location_id')
+      table.text('location_name')
     })
   ])
 }

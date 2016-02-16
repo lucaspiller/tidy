@@ -9,6 +9,7 @@ const fullSrc     = image.getAttribute('data-full')
 const metadataSrc = image.getAttribute('data-metadata')
 
 const metadata    = document.querySelector('#metadata')
+let renderMetadata = function() {}
 
 // load metadata
 fetch(metadataSrc)
@@ -16,60 +17,69 @@ fetch(metadataSrc)
     return response.json()
   })
   .then(function(metadata) {
-    if (metadata.timestamp) {
-      const date = new Date(metadata.timestamp * 1000)
-      const formatted = dateFormat(date, "mmmm dS yyyy")
-      document.querySelector('#metadata .taken span')
-        .textContent = formatted
-    }
-
-    if (metadata.width && metadata.height) {
-      let mp = (metadata.width * metadata.height) / 1000000
-      if (mp >= 2) {
-        mp = Math.floor(mp)
-      } else {
-        mp = Math.floor(mp * 10) / 10
+    renderMetadata = function() {
+      if (metadata.timestamp) {
+        const date = new Date(metadata.timestamp * 1000)
+        const formatted = dateFormat(date, "mmmm dS yyyy")
+        document.querySelector('#metadata .taken span')
+          .textContent = formatted
       }
-      const dimensions = `${metadata.width} x ${metadata.height} (${mp} MP)`
-      document.querySelector('#metadata .dimensions span')
-        .textContent = dimensions
-    }
 
-    if (metadata.make) {
-      document.querySelector('#metadata .make span')
-        .textContent = metadata.make
-    }
-    if (metadata.model) {
-      document.querySelector('#metadata .model span')
-        .textContent = metadata.model
-    }
+      if (metadata.width && metadata.height) {
+        let mp = (metadata.width * metadata.height) / 1000000
+        if (mp >= 2) {
+          mp = Math.floor(mp)
+        } else {
+          mp = Math.floor(mp * 10) / 10
+        }
+        const dimensions = `${metadata.width} x ${metadata.height} (${mp} MP)`
+        document.querySelector('#metadata .dimensions span')
+          .textContent = dimensions
+      }
 
-    if (metadata.fNumber) {
-      document.querySelector('#metadata .aperture span')
-        .textContent = 'f/' + metadata.fNumber
-    }
-    if (metadata.exposure) {
-      document.querySelector('#metadata .exposure span')
-        .textContent = '1/' + metadata.exposure
-    }
+      if (metadata.make) {
+        document.querySelector('#metadata .make span')
+          .textContent = metadata.make
+      }
+      if (metadata.model) {
+        document.querySelector('#metadata .model span')
+          .textContent = metadata.model
+      }
 
-    if (metadata.focalLength) {
-      document.querySelector('#metadata .focal-length span')
-        .textContent = metadata.focalLength + 'mm'
-    }
-    if (metadata.iso) {
-      document.querySelector('#metadata .iso span')
-        .textContent = metadata.iso
-    }
+      if (metadata.fNumber) {
+        document.querySelector('#metadata .aperture span')
+          .textContent = 'f/' + metadata.fNumber
+      }
+      if (metadata.exposure) {
+        document.querySelector('#metadata .exposure span')
+          .textContent = '1/' + metadata.exposure
+      }
 
-    if (metadata.latitude && metadata.longitude) {
-      const coord = metadata.latitude + ',' + metadata.longitude
-      const linkUrl = `https://maps.google.com?q=${coord}`
-      const imgUrl = `//maps.googleapis.com/maps/api/staticmap?size=400x200&zoom=15&maptype=terrain&format=jpg&markers=${coord}`
-      document.querySelector('#metadata .map').href = linkUrl
-      document.querySelector('#metadata .map img').src = imgUrl
-    } else {
-      document.querySelector('#metadata .map').remove()
+      if (metadata.focalLength) {
+        document.querySelector('#metadata .focal-length span')
+          .textContent = metadata.focalLength + 'mm'
+      }
+      if (metadata.iso) {
+        document.querySelector('#metadata .iso span')
+          .textContent = metadata.iso
+      }
+
+      if (metadata.coordinates.latitude && metadata.coordinates.longitude) {
+        const coord = metadata.coordinates.latitude + ',' + metadata.coordinates.longitude
+        const linkUrl = `https://maps.google.com?q=${coord}`
+        const imgUrl = `//maps.googleapis.com/maps/api/staticmap?size=400x200&zoom=15&maptype=terrain&format=jpg&markers=${coord}`
+        document.querySelector('#metadata .map').href = linkUrl
+        document.querySelector('#metadata .map img').src = imgUrl
+      } else {
+        document.querySelector('#metadata .map').remove()
+      }
+
+      if (metadata.location.id) {
+        document.querySelector('#metadata .location span')
+          .textContent = metadata.location.name
+      } else {
+        document.querySelector('#metadata .location').remove()
+      }
     }
   })
 
@@ -82,6 +92,7 @@ tempImage.src = fullSrc + "?width=" + window.innerWidth + "&height=" + window.in
 
 // events
 image.onclick = function() {
+  renderMetadata()
   item.classList.add('metadata')
 }
 
