@@ -15,7 +15,7 @@
       min-width: 100%;
       min-height: 100%;
 
-      transition: 0.25s linear -webkit-filter, 0.25s linear filter;
+      transition: 0.15s linear -webkit-filter, 0.15s linear filter;
     }
   }
 
@@ -28,7 +28,7 @@
 
     opacity: 0;
     visibility: hidden;
-    transition: 0.25s linear visibility, 0.25s linear opacity;
+    transition: 0.15s linear visibility, 0.25s linear opacity;
 
     background-color: rgba(0, 0, 0, 0.7);
 

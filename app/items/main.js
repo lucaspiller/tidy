@@ -71,14 +71,20 @@ fetch(metadataSrc)
         document.querySelector('#metadata .map').href = linkUrl
         document.querySelector('#metadata .map img').src = imgUrl
       } else {
-        document.querySelector('#metadata .map').remove()
+        const element = document.querySelector('#metadata .map')
+        if (element) {
+          element.remove()
+        }
       }
 
       if (metadata.location.id) {
         document.querySelector('#metadata .location span')
           .textContent = metadata.location.name
       } else {
-        document.querySelector('#metadata .location').remove()
+        const element = document.querySelector('#metadata .location')
+        if (element) {
+          element.remove()
+        }
       }
     }
   })
