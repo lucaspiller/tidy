@@ -9,12 +9,11 @@
     height: 100%;
     width: 100%;
     text-align: center;
+    overflow: hidden;
 
     img {
+      position: relative;
       margin: 0 auto;
-      min-width: 100%;
-      min-height: 100%;
-
       transition: 0.15s linear -webkit-filter, 0.15s linear filter;
     }
   }

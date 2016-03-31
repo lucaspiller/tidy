@@ -8,6 +8,8 @@ const image       = document.querySelector('#image img')
 const fullSrc     = image.getAttribute('data-full')
 const metadataSrc = image.getAttribute('data-metadata')
 
+window.image = image
+
 const metadata    = document.querySelector('#metadata')
 let renderMetadata = function() {}
 
@@ -89,14 +91,7 @@ fetch(metadataSrc)
     }
   })
 
-// load fullsize image
-const tempImage = new Image()
-tempImage.onload = function() {
-  image.src = tempImage.src
-}
-tempImage.src = fullSrc + "?width=" + window.innerWidth + "&height=" + window.innerHeight
-
-// events
+// events to toggle metadata
 image.onclick = function() {
   renderMetadata()
   item.classList.add('metadata')
@@ -105,3 +100,137 @@ image.onclick = function() {
 metadata.onclick = function() {
   item.classList.remove('metadata')
 }
+
+// zoom
+let originalWidth
+let originalHeight
+let offsetX
+let offsetY
+let aspectRatio
+let zoom
+let zoomMin
+
+function zoomToFit() {
+  originalWidth  = image.naturalWidth
+  originalHeight = image.naturalHeight
+  offsetX        = 0
+  offsetY        = 0
+  aspectRatio    = originalWidth / originalHeight
+
+  let height, width
+  if (aspectRatio > 1) {
+    zoom = window.innerWidth / originalWidth
+    height = Math.round(originalHeight * zoom)
+    if (height > window.innerHeight) {
+      zoom = window.innerHeight / originalHeight
+    }
+  } else {
+    zoom = window.innerHeight / originalHeight
+    width = Math.round(originalWidth * zoom)
+    if (width > window.innerWidth) {
+      zoom = window.innerWidth / originalwidth
+    }
+  }
+
+  width   = Math.round(originalWidth * zoom)
+  height  = Math.round(originalHeight * zoom)
+  zoomMin = zoom
+  image.style.width  = `${width}px`
+  image.style.height = `${height}px`
+}
+
+image.onload = function() {
+  zoomToFit()
+}
+
+image.onwheel = function(event) {
+  if (event.target != image)
+    return
+
+  const delta = event.deltaY
+  event.preventDefault()
+
+  if (Math.abs(delta) < 1)
+    return
+
+  const oldHeight = image.height
+  const oldWidth  = image.width
+
+  zoom += delta / 100
+  if (zoom < zoomMin) {
+    zoom = zoomMin
+  }
+
+  let width = Math.round(originalWidth * zoom)
+  let height = Math.round(originalHeight * zoom)
+
+  if (width > window.innerWidth) {
+    const oldOffsetX = (oldWidth - window.innerWidth) / 2
+    const newOffsetX = (width - window.innerWidth) / 2
+    offsetX += newOffsetX - oldOffsetX
+  } else {
+    offsetX = 0
+  }
+
+  if (height > window.innerHeight) {
+    const oldOffsetY = (oldHeight - window.innerHeight) / 2
+    const newOffsetY = (height - window.innerHeight) / 2
+    offsetY += newOffsetY - oldOffsetY
+  } else {
+    offsetY = 0
+  }
+
+  image.style.width  = `${width}px`
+  image.style.height = `${height}px`
+  image.style.top  = `-${offsetY}px`
+  image.style.left = `-${offsetX}px`
+}
+
+let dragLastY = 0
+let dragLastX = 0
+let dragging = false
+
+image.ondragstart = function(event) {
+  dragLastX = event.clientX
+  dragLastY = event.clientY
+}
+
+image.onmousedown = function(event) {
+  dragLastX = event.x
+  dragLastY = event.y
+  dragging = true
+}
+
+document.onmousemove = function(event) {
+  if (!dragging)
+    return
+
+  const deltaX = dragLastX - event.x
+  const deltaY = dragLastY - event.y
+
+  dragLastX = event.x
+  dragLastY = event.y
+
+  offsetY += deltaY
+  offsetX += deltaX
+  image.style.top  = `-${offsetY}px`
+  image.style.left = `-${offsetX}px`
+
+  console.log(deltaX, deltaY)
+  event.preventDefault()
+  return false
+}
+
+document.onmouseup = function(event) {
+  if (dragging)
+    dragging = false
+}
+
+
+// load fullsize image
+const tempImage = new Image()
+tempImage.onload = function() {
+  image.src = tempImage.src
+  zoomToFit()
+}
+tempImage.src = fullSrc + "?width=" + window.innerWidth + "&height=" + window.innerHeight
