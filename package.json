@@ -4,23 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "assets": "webpack --progress --colors"
+    "dev": "DEBUG=1 nodemon -i app ./bin/server"
   },
   "author": "Luca Spiller",
   "license": "MIT",
   "devDependencies": {
-    "css-loader": "^0.23.1",
-    "dateformat": "^1.0.12",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "imagesloaded": "^4.1.0",
-    "lodash": "^4.7.0",
-    "masonry-layout": "^4.0.0",
-    "node-sass": "^3.4.2",
-    "nodemon": "^1.9.1",
-    "sass-loader": "^3.2.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.12.14",
-    "whatwg-fetch": "^0.11.0"
+    "nodemon": "^1.9.1"
   },
   "dependencies": {
     "async": "^2.0.0-rc.2",
