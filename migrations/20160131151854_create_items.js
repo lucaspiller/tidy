@@ -1,10 +1,5 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
-    knex.schema.createTable('albums', function(table) {
-      table.increments('id').primary()
-      table.string('name').unique()
-      table.integer('tag_id').unique()
-    }),
     knex.schema.createTable('items', function(table) {
       table.increments('id').primary()
       table.string('path')
