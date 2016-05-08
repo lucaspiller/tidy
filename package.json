@@ -9,7 +9,8 @@
   "author": "Luca Spiller",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "on-headers": "^1.0.1"
   },
   "dependencies": {
     "async": "^2.0.0-rc.2",
