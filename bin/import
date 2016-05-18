@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+/* vim: set filetype=javascript: */
+
+"use strict";
+
+require('../lib/import.js').run()
